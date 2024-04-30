@@ -75,13 +75,13 @@ TOKEN="$token"
 CERT_HASH="$cert_hash"
 CP_IP="$cp_ip"
 #Join
-kubeadm join {$CP_IP}:6443 --token $TOKEN --discovery-token-ca-cert-hash $CERT_HASH
+kubeadm join $CP_IP:6443 --token $TOKEN --discovery-token-ca-cert-hash $CERT_HASH
 
 #Set up config as regular user
-#exit
-#mkdir -p $HOME/.kube
-#sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-#sudo chown $(id -u):$(id -g) $HOME/.kube/config
+exit
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 #Install calico
 sudo dnf install wget
