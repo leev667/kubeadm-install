@@ -7,10 +7,11 @@ dnf update -y
 cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
-baseurl=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/
 enabled=1
 gpgcheck=1
-gpgkey=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
+exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
 EOF
 
 # Installing Container Runtime prerequisites
@@ -65,7 +66,7 @@ systemctl restart containerd
 systemctl enable containerd
 
 #kubeadm initiliase apiserver address should be the same as main interface on master
-kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=10.0.0.5 | tee kubeadm-init.out
+kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=10.0.1.136 | tee kubeadm-init.out
 
 #Set up config as regular user
 exit
